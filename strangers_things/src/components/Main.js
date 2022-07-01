@@ -22,7 +22,7 @@ const Main = (props) => {
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch(
-        `https://strangers-things.herokuapp.com/api/2202-ftb-et-web-ft/posts`
+        `https://strangers-things.herokuapp.com/api/2202-ftb-et-web-pt/posts`
       );
       const data = await response.json();
       setPosts(data.data.posts);

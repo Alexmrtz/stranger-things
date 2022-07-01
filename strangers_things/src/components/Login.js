@@ -10,7 +10,7 @@ const Login = ({ setIsLoggedIn, currentToken }) => {
 
   async function handleClick(e) {
     e.preventDefault();
-    await loginUser(username, password);
+     await loginUser(username, password);
 
     setUsername("");
     setPassword("");
@@ -19,8 +19,9 @@ const Login = ({ setIsLoggedIn, currentToken }) => {
       setIsLoggedIn(true);
       history.push("/home");
       alert("You have successfully signed in");
+      const data = await getMe(token);
     }
-    const data = await getMe(currentToken);
+    
   }
 
   return (
