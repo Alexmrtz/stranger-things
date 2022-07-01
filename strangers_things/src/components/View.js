@@ -36,6 +36,9 @@ const View = (props) => {
               Delete Post
             </button>
           </Link>
+          <Link to={{ pathname: "/EditPost", state: { post: filterPost[0] } }}>
+            <button>Edit post</button>
+          </Link>
         </div>
       ) : null}
     </div>

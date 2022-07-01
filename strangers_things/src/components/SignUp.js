@@ -45,7 +45,7 @@ const SignUp = (setIsLoggedIn) => {
         <button type="submit">Sign Up</button>
       </form>
       <p>
-         Have an account?
+        Already have an account?
         <Link className="Sign" to="/">
           Login
         </Link>

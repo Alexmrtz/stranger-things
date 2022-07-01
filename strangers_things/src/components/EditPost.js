@@ -1,33 +1,38 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { newPost } from "../api";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { updatePost } from "../api";
+import Posts from "./Posts";
 
-const CreatePost = ({ posts, setPosts }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [location, setLocation] = useState("");
-  const [deliver, setDeliver] = useState(false);
-  const [checked, setChecked] = useState(false);
-
+const EditPost = () => {
+  const propsImport = useLocation();
+  const post = propsImport.state.post;
+  const setPosts = propsImport.state.setPosts;
+  const [title, setTitle] = useState(post.title);
+  const [description, setDescription] = useState(post.description);
+  const [price, setPrice] = useState(post.price);
+  const [location, setLocation] = useState(post.location);
+  const [deliver, setDeliver] = useState(post.deliver);
+  const [checked, setChecked] = useState(post.checked);
   let history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(post);
     const postDetailsObj = { title, description, location, price, deliver };
-    const response = await newPost(
+    console.log(postDetailsObj);
+    const response = await updatePost(
       postDetailsObj,
+      post._id,
       localStorage.getItem("token")
     );
-    const newPosts = [response.data.post, ...posts];
-    setPosts([...posts, response.data.post]);
+    console.log(response);
     history.push("/posts");
-    alert("Post added");
+    alert("Updated Post");
   };
 
   return (
     <div className="CreatePost">
-      <h1>Add New Post</h1>
+      <h1>Update post</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -79,10 +84,10 @@ const CreatePost = ({ posts, setPosts }) => {
         ></input>
         <label>Willing to deliver?</label>
         <br></br>
-        <button type="submit">CREATE</button>
+
+        <button type="submit">UPDATE</button>
       </form>
     </div>
   );
 };
-
-export default CreatePost;
+export default EditPost;

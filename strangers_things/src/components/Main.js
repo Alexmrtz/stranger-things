@@ -7,7 +7,10 @@ import Posts from "./Posts";
 import CreatePost from "./CreatePost";
 import { getMe } from "../api";
 import Home from "./Home";
+import Message from "./Message";
 import View from "./View";
+import Profile from "./Profile";
+import EditPost from "./EditPost";
 
 const Main = (props) => {
   const [token, setToken] = useState(null);
@@ -19,7 +22,7 @@ const Main = (props) => {
   useEffect(() => {
     const fetchPost = async () => {
       const response = await fetch(
-        `https://strangers-things.herokuapp.com/api/2202-ftb-et-web-pt/posts`
+        `https://strangers-things.herokuapp.com/api/2202-ftb-et-web-ft/posts`
       );
       const data = await response.json();
       setPosts(data.data.posts);
@@ -64,7 +67,8 @@ const Main = (props) => {
             token={localStorage.getItem("token")}
           />
         </Route>
-        <Route path="/posts/:postid/">
+        <Route path="/posts/:postid/messages">
+          <Message posts={posts} />
         </Route>
         <Route path="/posts/view/:postid">
           <View posts={posts} setPosts={setPosts} userObj={userObj} />
@@ -83,6 +87,21 @@ const Main = (props) => {
             setIsLoggedIn={setIsLoggedIn}
             posts={posts}
             setPosts={setPosts}
+          />
+        </Route>
+        <Route path="/EditPost">
+          <EditPost
+            setIsLoggedIn={setIsLoggedIn}
+            posts={posts}
+            setPosts={setPosts}
+          />
+        </Route>
+        <Route path="/profile">
+          <Profile
+            userObj={userObj}
+            setToken={setToken}
+            setIsLoggedIn={setIsLoggedIn}
+            setUserObj={setUserObj}
           />
         </Route>
       </Switch>

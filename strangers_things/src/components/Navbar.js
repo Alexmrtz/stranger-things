@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//header for page/links//
+
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <div className="NavBarClass">
